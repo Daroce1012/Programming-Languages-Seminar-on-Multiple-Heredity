@@ -24,13 +24,18 @@ class Estudiante
     {
         total += salario;
     }
-    int Salario(){return salario;}
+    int GetSalario(){return salario;}
+    int SetSalario(int valor){salario = valor;}
+    int DevolverTotal(){
+        return total;
+    }
 };
 
 class Trabajador
 {
     protected:
     int salario;
+    int total;
     public:
     Trabajador(int salarioN)
     {
@@ -39,7 +44,12 @@ class Trabajador
     }
     void CobrarSalario()
     {
-        salario+=500;
+        total+=salario;
+    }
+    int GetSalario(){return salario;}
+    int SetSalario(int valor){salario = valor;}
+    int DevolverTotal(){
+        return total;
     }
 };
 
@@ -81,8 +91,10 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     private:
     int horas_clase_impartidas;
     
-    public:
+    protected:
     int salario;
+    int total;
+    public:
     Alumno_Ayudante(int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(salarioN,horas_clase_recibidasN),Trabajador(salarioN)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
@@ -110,14 +122,16 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     virtual int DevolverSalario(){
         return Estudiante::salario + Trabajador::salario;
     }
+    int GetSalario(){return Estudiante::salario + Trabajador::salario;}
+    int GetTotal(){return total + Estudiante::total + Trabajador::total;}
 };
 
 int main()
 {
     Alumno_Ayudante AA(150,5,10);
     AA.Estudiante::CobrarSalario();
-    AA.salario = 90;
-    cout << AA.salario<< endl;
+    cout << AA.GetSalario();
+    cout << AA.DevolverSalario()<< endl;
     cout << AA.DevolverSalario() << endl;
     return 0;
 }
