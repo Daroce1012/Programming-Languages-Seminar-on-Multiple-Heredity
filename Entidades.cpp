@@ -88,7 +88,13 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
         cout<<"Alumno_Ayudante called"<< endl;
         salario = Estudiante::salario + Trabajador::salario;
     }
-    Alumno_Ayudante(int horas_clase_recibidasN, int horas_clase_impartidasN, Trabajador Trabajador):Estudiante(horas_clase_recibidasN)
+    Alumno_Ayudante(int salario_estudiante, 
+                    int salario_trabajador, 
+                    int horas_clase_recibidasN, 
+                    int horas_clase_impartidasN, 
+                    Trabajador Trabajador
+                    ):
+    Estudiante(salario_estudiante, horas_clase_recibidasN), Trabajador(salario_trabajador)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
         cout<<"Alumno_Ayudante called"<< endl;
