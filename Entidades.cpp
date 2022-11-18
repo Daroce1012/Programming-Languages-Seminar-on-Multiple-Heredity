@@ -5,8 +5,9 @@ using namespace std;
 
 class Estudiante
 {
-    private:
-    int salario;
+    protected:
+    int salario; 
+    int total;
     int horas_clase_recibida;
     public:
     Estudiante(int salarioN, int horas_claseN)
@@ -21,18 +22,19 @@ class Estudiante
     }
     void CobrarSalario()
     {
-        salario+=200;
+        total += salario;
     }
 };
 
 class Trabajador
 {
-    private:
+    protected:
     int salario;
     public:
     Trabajador(int salarioN)
     {
         salario=salarioN;
+         cout<<"Trabajador called"<< endl;
     }
     void CobrarSalario()
     {
@@ -77,21 +79,37 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
 {
     private:
     int horas_clase_impartidas;
+    
     public:
+    int salario;
     Alumno_Ayudante(int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(salarioN,horas_clase_recibidasN),Trabajador(salarioN)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
         cout<<"Alumno_Ayudante called"<< endl;
+        salario = Estudiante::salario + Trabajador::salario;
+    }
+    Alumno_Ayudante(int horas_clase_recibidasN, int horas_clase_impartidasN, Trabajador Trabajador):Estudiante(horas_clase_recibidasN)
+    {
+        horas_clase_impartidas=horas_clase_impartidasN;
+        cout<<"Alumno_Ayudante called"<< endl;
+        salario = Estudiante::salario + Trabajador::salario;
     }
     void ImpartirClase()
     {
         horas_clase_impartidas+=10;
         cout<<horas_clase_impartidas<< endl;
     }
+
+    virtual int DevolverSalario(){
+        return Estudiante::salario + Trabajador::salario;
+    }
 };
 
 int main()
 {
     Alumno_Ayudante AA(150,5,10);
+    AA.Estudiante::CobrarSalario();
+    cout << AA.salario<< endl;
+    cout << AA.DevolverSalario() << endl;
     return 0;
 }
