@@ -24,6 +24,7 @@ class Estudiante
     {
         total += salario;
     }
+    int Salario(){return salario;}
 };
 
 class Trabajador
@@ -115,6 +116,7 @@ int main()
 {
     Alumno_Ayudante AA(150,5,10);
     AA.Estudiante::CobrarSalario();
+    AA.salario = 90;
     cout << AA.salario<< endl;
     cout << AA.DevolverSalario() << endl;
     return 0;
