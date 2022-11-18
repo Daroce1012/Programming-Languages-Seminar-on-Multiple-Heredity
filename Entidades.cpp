@@ -15,6 +15,7 @@ class Estudiante
         salario=salarioN;
         horas_clase_recibida=horas_claseN;
         cout<<"Estudiante called"<< endl;
+        total = 0;
     }
     void RecibirClase()
     {
@@ -41,6 +42,7 @@ class Trabajador
     {
         salario=salarioN;
          cout<<"Trabajador called"<< endl;
+        total = 0;
     }
     void CobrarSalario()
     {
@@ -100,17 +102,18 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
         horas_clase_impartidas=horas_clase_impartidasN;
         cout<<"Alumno_Ayudante called"<< endl;
         salario = Estudiante::salario + Trabajador::salario;
+        total = 0;
     }
     Alumno_Ayudante(int salario_estudiante, 
                     int salario_trabajador, 
                     int horas_clase_recibidasN, 
-                    int horas_clase_impartidasN, 
-                    Trabajador Trabajador
+                    int horas_clase_impartidasN
                     ):
     Estudiante(salario_estudiante, horas_clase_recibidasN), Trabajador(salario_trabajador)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
         cout<<"Alumno_Ayudante called"<< endl;
+        total = 0;
         salario = Estudiante::salario + Trabajador::salario;
     }
     void ImpartirClase()
@@ -123,15 +126,16 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
         return Estudiante::salario + Trabajador::salario;
     }
     int GetSalario(){return Estudiante::salario + Trabajador::salario;}
-    int GetTotal(){return total + Estudiante::total + Trabajador::total;}
+    int DevolverTotal(){return total + Estudiante::total + Trabajador::total;}
 };
 
 int main()
 {
     Alumno_Ayudante AA(150,5,10);
     AA.Estudiante::CobrarSalario();
-    cout << AA.GetSalario();
+    cout << AA.GetSalario()<<endl;
     cout << AA.DevolverSalario()<< endl;
     cout << AA.DevolverSalario() << endl;
+    cout << AA.DevolverTotal() << endl;
     return 0;
 }
