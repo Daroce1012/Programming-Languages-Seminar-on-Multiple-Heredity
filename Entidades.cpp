@@ -108,7 +108,7 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     int salario;
     int total;
     public:
-    Alumno_Ayudante(string nombre, int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(salarioN,horas_clase_recibidasN),Trabajador(salarioN)
+    Alumno_Ayudante(string nombre, int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(nombre, salarioN,horas_clase_recibidasN),Trabajador(nombre, salarioN)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
         salario = Estudiante::salario + Trabajador::salario;
