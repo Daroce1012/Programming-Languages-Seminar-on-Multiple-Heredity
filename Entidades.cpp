@@ -110,6 +110,7 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     public:
     Alumno_Ayudante(string nombre, int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(nombre, salarioN,horas_clase_recibidasN),Trabajador(nombre, salarioN)
     {
+        nombre = nombre;
         horas_clase_impartidas=horas_clase_impartidasN;
         salario = Estudiante::salario + Trabajador::salario;
         total = 0;
@@ -122,6 +123,7 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
                     ):
     Estudiante(nombre, salario_estudiante, horas_clase_recibidasN), Trabajador(nombre, salario_trabajador)
     {
+        nombre = nombre;
         horas_clase_impartidas=horas_clase_impartidasN;
         total = 0;
         salario = Estudiante::salario + Trabajador::salario;
@@ -137,6 +139,9 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     int GetSalario(){return Estudiante::salario + Trabajador::salario;}
     int GetTotal(){return total + Estudiante::total + Trabajador::total;}
     int GetHorasClasesImpartidas(){return horas_clase_impartidas;}
+    void PrintNombre(){
+        cout << nombre << endl;
+    }
 };
 
 int main()
@@ -147,5 +152,10 @@ int main()
     cout << AA.Estudiante::GetSalario()<< endl;
     cout << AA.Trabajador::GetSalario() << endl;
     cout << AA.GetTotal() << endl;
+    AA.CobrarSalario();
+    cout << AA.GetTotal() << endl;
+    AA.PrintNombre();
+
+
     return 0;
 }
