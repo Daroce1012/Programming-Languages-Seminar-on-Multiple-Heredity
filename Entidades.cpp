@@ -8,18 +8,18 @@ class Estudiante
     protected:
     int salario; 
     int total;
-    int horas_clase_recibida;
+    int horas_clases_recibidas;
     public:
     Estudiante(int salarioN, int horas_claseN)
     {
         salario=salarioN;
-        horas_clase_recibida=horas_claseN;
+        horas_clases_recibidas=horas_claseN;
         cout<<"Estudiante called"<< endl;
         total = 0;
     }
     void RecibirClase()
     {
-        horas_clase_recibida+=48;
+        horas_clases_recibidas+=48;
     }
     void CobrarSalario()
     {
@@ -27,9 +27,11 @@ class Estudiante
     }
     int GetSalario(){return salario;}
     int SetSalario(int valor){salario = valor;}
-    int DevolverTotal(){
+    int GetTotal(){
         return total;
     }
+    int GetHorasClases(){return horas_clases_recibidas;}
+    int SetHorasClases(int valor){horas_clases_recibidas = valor;}
 };
 
 class Trabajador
@@ -50,7 +52,7 @@ class Trabajador
     }
     int GetSalario(){return salario;}
     int SetSalario(int valor){salario = valor;}
-    int DevolverTotal(){
+    int GetTotal(){
         return total;
     }
 };
@@ -122,11 +124,11 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
         cout<<horas_clase_impartidas<< endl;
     }
 
-    virtual int DevolverSalario(){
-        return Estudiante::salario + Trabajador::salario;
-    }
+    // virtual int DevolverSalario(){
+    //     return Estudiante::salario + Trabajador::salario;
+    // }
     int GetSalario(){return Estudiante::salario + Trabajador::salario;}
-    int DevolverTotal(){return total + Estudiante::total + Trabajador::total;}
+    int GetTotal(){return total + Estudiante::total + Trabajador::total;}
 };
 
 int main()
@@ -134,8 +136,8 @@ int main()
     Alumno_Ayudante AA(150,5,10);
     AA.Estudiante::CobrarSalario();
     cout << AA.GetSalario()<<endl;
-    cout << AA.DevolverSalario()<< endl;
-    cout << AA.DevolverSalario() << endl;
-    cout << AA.DevolverTotal() << endl;
+    cout << AA.GetSalario()<< endl;
+    cout << AA.GetSalario() << endl;
+    cout << AA.GetTotal() << endl;
     return 0;
 }
