@@ -1,17 +1,17 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 
 
-class Aprendiz():
+class Aprendiz(ABC):
     @abstractmethod
     def RecibirClase(self,clase):
         pass
-        #print(self.nombre+'Recibe clase de '+ clase)
+        
 
-class Instructor():
+class Instructor(ABC):
     @abstractmethod
     def ImpartirClase(self,clase):
         pass
-       # print(self.nombre+'Imparte clase de ' + clase)
+       
 
 
 class Persona_Plantilla():
@@ -20,7 +20,7 @@ class Persona_Plantilla():
         self.salario = salario  # Salario o estipendio de la persona que constituye una plantila
 
     def CobrarSalario(self):
-        print(self.nombre+" Ha Cobrado $"+ str(self.salario))
+        print(self.nombre+" ha cobrado $"+ str(self.salario))
 
 
 class Trabajador(Persona_Plantilla):
@@ -34,7 +34,7 @@ class Estudiante(Persona_Plantilla,Aprendiz):
         self.h_clases = h_clases
     
     def RecibirClase(self,clase):
-        print(self.nombre+'Recibe clase de '+ clase)
+        print(self.nombre+' recibe clase de '+ clase)
 
 
 
@@ -44,7 +44,7 @@ class Profesor(Trabajador,Instructor):
         self.h_clases = h_clases
    
     def ImpartirClase(self,clase): 
-       print(self.nombre+'Imparte clase de ' + clase)
+       print(self.nombre+' imparte clase de ' + clase)
 
 
 class AlumnoAyudante(Estudiante,Trabajador,Instructor):
@@ -55,7 +55,7 @@ class AlumnoAyudante(Estudiante,Trabajador,Instructor):
         self.horas_clase_imp = horas_clase_imp
     
     def CobrarSalario(self):
-        print(self.nombre+" Ha Cobrado $"+ str(self.salario+self.salario_extra))
+        print(self.nombre+" ha cobrado $"+ str(self.salario+self.salario_extra))
         
      
 class ProfesorAdiestrado(Profesor,Aprendiz):
@@ -64,9 +64,7 @@ class ProfesorAdiestrado(Profesor,Aprendiz):
         self.h_clases_rec = h_clases_rec
 
     def RecibirClase(self,clase):
-        print(self.nombre+'Recibe clase de '+ clase)
+        print(self.nombre+' recibe clase de '+ clase)
 
 
 
-
-    
