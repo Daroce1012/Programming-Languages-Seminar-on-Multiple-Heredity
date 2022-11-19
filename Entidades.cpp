@@ -21,7 +21,7 @@ class Estudiante : public virtual Plantilla
     public:
     Estudiante(string nombre, int salarioN, int horas_claseN)
     {
-        nombre = nombre;
+        Plantilla::nombre = nombre;
         salario=salarioN;
         horas_clases_recibidas=horas_claseN;
         total = 0;
@@ -53,7 +53,7 @@ class Trabajador : public virtual Plantilla
     public:
     Trabajador(string nombre, int salarioN)
     {
-        nombre = nombre;
+        Plantilla::nombre = nombre;
         salario=salarioN;
         total = 0;
     }
@@ -90,7 +90,7 @@ class Profesor_Adiestrado: public Profesor
     public:
     Profesor_Adiestrado(string nombre, int salarioN,int horas_clase_impartidasN,int horas_clase_recibidasN):Profesor(nombre, salarioN,horas_clase_impartidasN)
     {
-        nombre = nombre;
+        Plantilla::nombre = nombre;
         horas_clase_recibidas=horas_clase_recibidasN;
     }
     void RecibirClase()
@@ -110,7 +110,7 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     public:
     Alumno_Ayudante(string nombre, int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(nombre, salarioN,horas_clase_recibidasN),Trabajador(nombre, salarioN)
     {
-        nombre = nombre;
+        Plantilla::nombre = nombre;
         horas_clase_impartidas=horas_clase_impartidasN;
         salario = Estudiante::salario + Trabajador::salario;
         total = 0;
@@ -123,7 +123,7 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
                     ):
     Estudiante(nombre, salario_estudiante, horas_clase_recibidasN), Trabajador(nombre, salario_trabajador)
     {
-        nombre = nombre;
+        Plantilla::nombre = nombre;
         horas_clase_impartidas=horas_clase_impartidasN;
         total = 0;
         salario = Estudiante::salario + Trabajador::salario;
