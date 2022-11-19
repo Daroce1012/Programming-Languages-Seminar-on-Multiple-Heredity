@@ -9,17 +9,18 @@ class Estudiante
     int salario; 
     int total;
     int horas_clases_recibidas;
+    int total_clases;
     public:
     Estudiante(int salarioN, int horas_claseN)
     {
         salario=salarioN;
         horas_clases_recibidas=horas_claseN;
-        cout<<"Estudiante called"<< endl;
         total = 0;
+        total_clases = 0;
     }
     void RecibirClase()
     {
-        horas_clases_recibidas+=48;
+        total_clases+=horas_clases_recibidas;
     }
     void CobrarSalario()
     {
@@ -32,6 +33,7 @@ class Estudiante
     }
     int GetHorasClases(){return horas_clases_recibidas;}
     int SetHorasClases(int valor){horas_clases_recibidas = valor;}
+    int GetTotalHorasClases(){return total_clases;}
 };
 
 class Trabajador
@@ -43,7 +45,6 @@ class Trabajador
     Trabajador(int salarioN)
     {
         salario=salarioN;
-         cout<<"Trabajador called"<< endl;
         total = 0;
     }
     void CobrarSalario()
@@ -69,7 +70,6 @@ class Profesor: public Trabajador
     void ImpartirClase()
     {
         horas_clase_impartidas+=15;
-        cout<<horas_clase_impartidas<< endl;
     }
 };
 
@@ -81,12 +81,10 @@ class Profesor_Adiestrado: public Profesor
     Profesor_Adiestrado(int salarioN,int horas_clase_impartidasN,int horas_clase_recibidasN):Profesor(salarioN,horas_clase_impartidasN)
     {
         horas_clase_recibidas=horas_clase_recibidasN;
-        cout<<"Profesor_Adiestrado called"<< endl;
     }
     void RecibirClase()
     {
         horas_clase_recibidas+=15;
-        cout<<horas_clase_recibidas<< endl;
     }
 };
 
@@ -102,7 +100,6 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     Alumno_Ayudante(int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(salarioN,horas_clase_recibidasN),Trabajador(salarioN)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
-        cout<<"Alumno_Ayudante called"<< endl;
         salario = Estudiante::salario + Trabajador::salario;
         total = 0;
     }
@@ -114,30 +111,26 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     Estudiante(salario_estudiante, horas_clase_recibidasN), Trabajador(salario_trabajador)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
-        cout<<"Alumno_Ayudante called"<< endl;
         total = 0;
         salario = Estudiante::salario + Trabajador::salario;
     }
     void ImpartirClase()
     {
-        horas_clase_impartidas+=10;
-        cout<<horas_clase_impartidas<< endl;
+        horas_clase_impartidas+=1;
     }
 
-    // virtual int DevolverSalario(){
-    //     return Estudiante::salario + Trabajador::salario;
-    // }
     int GetSalario(){return Estudiante::salario + Trabajador::salario;}
     int GetTotal(){return total + Estudiante::total + Trabajador::total;}
+    int GetHorasClasesImpartidas(){return horas_clase_impartidas;}
 };
 
 int main()
 {
-    Alumno_Ayudante AA(150,5,10);
+    Alumno_Ayudante AA(150,50,2,10);
     AA.Estudiante::CobrarSalario();
     cout << AA.GetSalario()<<endl;
-    cout << AA.GetSalario()<< endl;
-    cout << AA.GetSalario() << endl;
+    cout << AA.Estudiante::GetSalario()<< endl;
+    cout << AA.Trabajador::GetSalario() << endl;
     cout << AA.GetTotal() << endl;
     return 0;
 }
