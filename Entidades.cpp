@@ -141,7 +141,7 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
 
 int main()
 {
-    Alumno_Ayudante AA(150,50,2,10);
+    Alumno_Ayudante AA("Belsai y Daniela", 150,50,2,10);
     AA.Estudiante::CobrarSalario();
     cout << AA.GetSalario()<<endl;
     cout << AA.Estudiante::GetSalario()<< endl;
