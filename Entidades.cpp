@@ -3,16 +3,25 @@
 
 using namespace std;
 
-class Estudiante
+class Plantilla
+{
+    protected:
+    string nombre;
+    virtual void CobrarSalario(){};
+};
+
+class Estudiante : public virtual Plantilla
 {
     protected:
     int salario; 
     int total;
     int horas_clases_recibidas;
     int total_clases;
+
     public:
-    Estudiante(int salarioN, int horas_claseN)
+    Estudiante(string nombre, int salarioN, int horas_claseN)
     {
+        nombre = nombre;
         salario=salarioN;
         horas_clases_recibidas=horas_claseN;
         total = 0;
@@ -22,7 +31,7 @@ class Estudiante
     {
         total_clases+=horas_clases_recibidas;
     }
-    void CobrarSalario()
+    virtual void CobrarSalario()
     {
         total += salario;
     }
@@ -36,18 +45,19 @@ class Estudiante
     int GetTotalHorasClases(){return total_clases;}
 };
 
-class Trabajador
+class Trabajador : public virtual Plantilla
 {
     protected:
     int salario;
     int total;
     public:
-    Trabajador(int salarioN)
+    Trabajador(string nombre, int salarioN)
     {
+        nombre = nombre;
         salario=salarioN;
         total = 0;
     }
-    void CobrarSalario()
+    virtual void CobrarSalario()
     {
         total+=salario;
     }
@@ -63,7 +73,7 @@ class Profesor: public Trabajador
     private:
     int horas_clase_impartidas;
     public:
-    Profesor(int salarioN,int horas_claseN):Trabajador(salarioN)
+    Profesor(string nombre, int salarioN,int horas_claseN):Trabajador(nombre, salarioN)
     {
         horas_clase_impartidas=horas_claseN;
     }
@@ -78,8 +88,9 @@ class Profesor_Adiestrado: public Profesor
     private:
     int horas_clase_recibidas;
     public:
-    Profesor_Adiestrado(int salarioN,int horas_clase_impartidasN,int horas_clase_recibidasN):Profesor(salarioN,horas_clase_impartidasN)
+    Profesor_Adiestrado(string nombre, int salarioN,int horas_clase_impartidasN,int horas_clase_recibidasN):Profesor(nombre, salarioN,horas_clase_impartidasN)
     {
+        nombre = nombre;
         horas_clase_recibidas=horas_clase_recibidasN;
     }
     void RecibirClase()
@@ -97,18 +108,19 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     int salario;
     int total;
     public:
-    Alumno_Ayudante(int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(salarioN,horas_clase_recibidasN),Trabajador(salarioN)
+    Alumno_Ayudante(string nombre, int salarioN, int horas_clase_recibidasN, int horas_clase_impartidasN):Estudiante(salarioN,horas_clase_recibidasN),Trabajador(salarioN)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
         salario = Estudiante::salario + Trabajador::salario;
         total = 0;
     }
-    Alumno_Ayudante(int salario_estudiante, 
+    Alumno_Ayudante(string nombre,
+                    int salario_estudiante, 
                     int salario_trabajador, 
                     int horas_clase_recibidasN, 
                     int horas_clase_impartidasN
                     ):
-    Estudiante(salario_estudiante, horas_clase_recibidasN), Trabajador(salario_trabajador)
+    Estudiante(nombre, salario_estudiante, horas_clase_recibidasN), Trabajador(nombre, salario_trabajador)
     {
         horas_clase_impartidas=horas_clase_impartidasN;
         total = 0;
@@ -119,6 +131,9 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
         horas_clase_impartidas+=1;
     }
 
+    void CobrarSalario(){
+        Estudiante::CobrarSalario(); Trabajador::CobrarSalario();
+    }
     int GetSalario(){return Estudiante::salario + Trabajador::salario;}
     int GetTotal(){return total + Estudiante::total + Trabajador::total;}
     int GetHorasClasesImpartidas(){return horas_clase_impartidas;}
