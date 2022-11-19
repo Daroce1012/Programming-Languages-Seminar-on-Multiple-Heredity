@@ -1,10 +1,11 @@
 from abc import abstractmethod
 
-class Asalariado():
-    @abstractmethod
-    def CobrarSalario(self):
-        #print(self.nombre+" ha Cobrado $"+ str(self.salario))
-        pass
+
+# class Asalariado():
+#     @abstractmethod
+#     def CobrarSalario(self):
+#         #print(self.nombre+" ha Cobrado $"+ str(self.salario))
+#         pass
     
 class Aprendiz():
     @abstractmethod
@@ -19,7 +20,7 @@ class Instructor():
        # print(self.nombre+'Imparte clase de ' + clase)
 
 
-class Persona_Plantilla(Asalariado):
+class Persona_Plantilla():
     def __init__(self,nombre,salario):
         self.nombre = nombre    # Nombre de la persona que constituye una plantila
         self.salario = salario  # Salario o estipendio de la persona que constituye una plantila
@@ -73,3 +74,8 @@ class ProfesorAdiestrado(Profesor,Aprendiz):
 
 
 
+
+Pablo = AlumnoAyudante("Pablo",100,8,50,4)
+Pablo.h_clases = 2
+Pablo.CobrarSalario()
+print(Pablo.h_clases)
