@@ -7,7 +7,11 @@ class Plantilla
 {
     protected:
     string nombre;
+    public:
     virtual void CobrarSalario(){};
+    virtual void PrintNombre(){
+        cout << nombre << endl;
+    }
 };
 
 class Estudiante : public virtual Plantilla
@@ -139,9 +143,6 @@ class Alumno_Ayudante:public Estudiante, public Trabajador
     int GetSalario(){return Estudiante::salario + Trabajador::salario;}
     int GetTotal(){return total + Estudiante::total + Trabajador::total;}
     int GetHorasClasesImpartidas(){return horas_clase_impartidas;}
-    void PrintNombre(){
-        cout << nombre << endl;
-    }
 };
 
 int main()
@@ -156,6 +157,8 @@ int main()
     cout << AA.GetTotal() << endl;
     AA.PrintNombre();
 
+    Profesor_Adiestrado PF("Belsai y Daniela", 150,50,2);
+    PF.PrintNombre();
 
     return 0;
 }
